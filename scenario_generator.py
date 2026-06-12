@@ -79,7 +79,7 @@ def _make_distance_matrix(n_customers: int, rng, lo=10, hi=200):
 #
 # Parameters used:         Value
 #   W_Nr_Sup               1
-#   W_Ca_Sup               200
+#   W_Ca_Sup               20
 #   P_Nr                   1
 #   P_Ho_Co_Sup            0.05
 #   P_Ho_Co_Cust           0.1
@@ -98,7 +98,7 @@ def _basic(rng) -> IRPScenario:
 
     return IRPScenario(
         n_supplier_warehouses=1,                        # W_Nr_Sup = 1
-        supplier_warehouse_capacity=200.0,              # added (realistic)
+        supplier_warehouse_capacity=20.0,              # added (realistic)
         n_products=n_prod,
         product_sizes=np.ones(n_prod),                  # not used (=1)
         supplier_holding_cost=np.full(n_prod, 0.05),    # added
@@ -134,7 +134,7 @@ def _basic(rng) -> IRPScenario:
 #
 # Parameters used:         Value
 #   W_Nr_Sup               1
-#   W_Ca_Sup               500
+#   W_Ca_Sup               30
 #   P_Nr                   1
 #   P_Si                   1
 #   P_Ho_Co_Sup            0.05
@@ -157,7 +157,7 @@ def _simple(rng) -> IRPScenario:
 
     return IRPScenario(
         n_supplier_warehouses=1,                        # W_Nr_Sup = 1
-        supplier_warehouse_capacity=500.0,              # added (realistic)
+        supplier_warehouse_capacity=30.0,              # added (realistic)
         n_products=n_prod,
         product_sizes=np.ones(n_prod),                  # P_Si = 1
         supplier_holding_cost=np.full(n_prod, 0.05),    # added
@@ -333,7 +333,7 @@ def _complex(rng) -> IRPScenario:
     v_cap = rng.integers(10, 101, size=n_vt).astype(float)  # V_Ca_Ty 10-100
     v_cost = rng.uniform(0.3, 3.0, size=n_vt)           # V_Ty_Co 0.3-3
     h_sup = rng.uniform(0.10, 0.40, size=n_prod)        # P_Ho_Co_Sup 0.10-0.40
-    h_cust = rng.uniform(0.10, 0.90, size=n_prod)       # P_Ho_Co_Cust 0.10-0.9
+    h_cust = rng.uniform(0.10, 0.90, size=n_prod)       # P_Ho_Co_Cus2t 0.10-0.9
     rs = int(rng.choice([1, 2]))                        # RS = 1 or 2
 
     return IRPScenario(
