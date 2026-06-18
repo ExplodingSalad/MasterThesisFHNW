@@ -215,10 +215,13 @@ def analyse(results: list[AlgoRunResult], ecfg) -> tuple[list[dict], list[dict]]
     )
 
     for (level, inst), alg_dict in sorted(grouped.items()):
-        means = {alg: np.mean(alg_dict[alg]) for alg in algorithms}
-        sorted_algs = sorted(means, key=means.get)
-        for rank, alg in enumerate(sorted_algs, start=1):
-            level_ranks[level][alg].append(rank)
+        # Use scipy.stats.rankdata with 'average' method so that algorithms
+        # tied on mean fitness receive the same (averaged) rank — e.g. two
+        # tied for first both get rank 1.5, not arbitrary ranks 1 and 2.
+        means_arr = np.array([np.mean(alg_dict[alg]) for alg in algorithms])
+        ranks_arr = stats.rankdata(means_arr, method='average')
+        for alg, rank in zip(algorithms, ranks_arr):
+            level_ranks[level][alg].append(float(rank))
 
     print(f"  {'Level':<15}", end="")
     for alg in algorithms:

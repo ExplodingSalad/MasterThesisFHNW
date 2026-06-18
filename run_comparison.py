@@ -49,7 +49,7 @@ from scenario_generator import generate_scenario
 class ExperimentConfig:
     """Controls the entire experimental setup."""
     levels: list[str]                         # scenario complexity levels
-    n_runs: int = 3                          # independent runs per algorithm per scenario
+    n_runs: int = 15                          # independent runs per algorithm per scenario. NOTE: using more than 15 runs requires >24GB of RAM
     n_scenario_instances: int = 10          # random instances per level
     max_iter: int = 500                       # iterations for WPT
     pop_size: int = 30                       # population size for all algorithms
